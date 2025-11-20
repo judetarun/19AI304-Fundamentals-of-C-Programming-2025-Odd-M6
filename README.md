@@ -33,7 +33,32 @@ To develop a C program using the static storage class in a function with a param
 ### Step 8:
   Stop
 # Program:
+```
+#include <stdio.h>
+
+void display(int n)
+{
+    static float base = 100.25;
+    printf("%.2f  ", base + n);
+    base += 100.25;
+}
+
+int main()
+{
+    int input, i;
+
+    scanf("%d", &input);
+
+    for (i = 0; i < 5; i++)
+        display(input);
+
+    return 0;
+}
+
+```
 # Output:
+<img width="443" height="208" alt="image" src="https://github.com/user-attachments/assets/f2e2a262-3ee6-42f0-8e26-d5a250a48f14" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -79,7 +104,36 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11:
   Stop
 # Program:
+```
+#include <stdio.h>
+
+int add(int a, int b){ return a+b; }
+int sub(int a, int b){ return a-b; }
+int mul(int a, int b){ return a*b; }
+int divi(int a, int b){ return a/b; }
+
+int main()
+{
+    int a, b, ch;
+    int (*op)(int, int);
+
+    scanf("%d %d", &a, &b);
+    scanf("%d", &ch);
+
+    if (ch == 1) op = add;
+    else if (ch == 2) op = sub;
+    else if (ch == 3) op = mul;
+    else if (ch == 4 && b != 0) op = divi;
+    else return 0;
+
+    printf("%d", op(a, b));
+    return 0;
+}
+
+```
 # Output:
+<img width="196" height="231" alt="image" src="https://github.com/user-attachments/assets/4972446b-8979-4300-b160-f1ba927b7cec" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -123,7 +177,48 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+```
+#include <stdio.h>
+
+struct employee
+{
+    int eno;
+    char ename[50];
+    float salary;
+};
+
+int main()
+{
+    struct employee emp[50];
+    int n, i;
+    float high;
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", &emp[i].eno);
+        scanf(" %[^\n]", emp[i].ename);
+        scanf("%f", &emp[i].salary);
+    }
+
+    high = emp[0].salary;
+
+    for (i = 1; i < n; i++)
+        if (emp[i].salary > high)
+            high = emp[i].salary;
+
+    printf("\nEmployee(s) with highest salary:\n");
+    for (i = 0; i < n; i++)
+        if (emp[i].salary == high)
+            printf("%d  %s  %.2f\n", emp[i].eno, emp[i].ename, emp[i].salary);
+
+    return 0;
+}
+
+```
 # Output:
+<img width="397" height="489" alt="image" src="https://github.com/user-attachments/assets/cc6d416a-c40d-4be8-844a-a83bc5e538b1" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -166,7 +261,50 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9:
   Stop
 # Program:
+```
+#include <stdio.h>
+
+struct date {
+    int c_date, c_month, c_year;
+    int b_date, b_month, b_year;
+    int cal_date, cal_month, cal_year;
+};
+
+void findAge(struct date *d) {
+    int month[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+
+    if (d->b_date > d->c_date) {
+        d->c_date += month[d->c_month - 2];
+        d->c_month--;
+    }
+
+    if (d->b_month > d->c_month) {
+        d->c_year--;
+        d->c_month += 12;
+    }
+
+    d->cal_date = d->c_date - d->b_date;
+    d->cal_month = d->c_month - d->b_month;
+    d->cal_year = d->c_year - d->b_year;
+}
+
+int main() {
+    struct date d;
+    scanf("%d %d %d", &d.c_date, &d.c_month, &d.c_year);
+    scanf("%d %d %d", &d.b_date, &d.b_month, &d.b_year);
+
+    findAge(&d);
+
+    printf("Age = %d years %d months %d days\n",
+           d.cal_year, d.cal_month, d.cal_date);
+
+    return 0;
+}
+
+```
 # Output:
+<img width="467" height="241" alt="image" src="https://github.com/user-attachments/assets/47194251-8935-4a8e-b7eb-2d5e0c411119" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -202,7 +340,30 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+```
+#include <stdio.h>
+
+union data {
+    int num;
+    char ch;
+};
+
+int main() {
+    union data u, *p;
+    p = &u;
+
+    p->num = 65;
+
+    printf("Integer: %d\n", p->num);
+    printf("Character: %c\n", p->ch);
+
+    return 0;
+}
+
+```
 # Output:
+<img width="378" height="96" alt="image" src="https://github.com/user-attachments/assets/9661c894-8787-4bc1-848a-8bad1e862c41" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
